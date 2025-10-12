@@ -1,11 +1,39 @@
-function goldMineRace(a, b, c){
-    let t = a.map((e, i) => Math.sqrt(Math.abs(c[0] - e[0]) ** 2 + Math.abs(c[1] - e[1]) ** 2) / b[i]), r = t.reduce((a,c) => {
-        a[c] = (a[c] || 0) + 1
-        return a
-    }, {})
-    t = t.map((e,i) => [e,i]).filter(e=>r[e[0]] == 1)
-    return (r = (t.sort((a, b) => a[0] - b[0])[0] || [])[1]) !== undefined?r:-1
+function maxSum(arr, range) {
+  const tree = arr.slice(0);
+  for (let i = 0, n = arr.length; i < n; i++) {
+    let j = i | (i + 1);
+    if (j < n) {
+      tree[j] += tree[i];
+    }
+  }
+  let max = -Infinity;
+  for (let [start, end, num] of range) {
+    update(start, num - arr[start], arr.length, tree);
+    arr[start] = num;
+    const summed = sum(end, tree) - sum(start - 1, tree);
+    if (summed > max) {
+      max = summed;
+    }
+  }
+  return max;
 }
 
-console.log(goldMineRace([[6,7],  [-8,-5],  [12,-3],  [-14,5]],[0.73, 0.97, 0.85, 0.88],[1, 2]))
-console.log(goldMineRace([[-3,-4],  [3,4],  [-3,4],  [3,-4]],[5, 5, 2, 2],[0, 0]))
+function sum(i, tree) {
+  let sum = 0;
+  while (i >= 0) {
+    sum += tree[i];
+    i &= i + 1;
+    i--;
+  }
+  return sum;
+}
+
+function update(i, v, n, tree) {
+  while (i < n) {
+    tree[i] += v;
+    i |= i + 1;
+  }
+}
+
+
+console.log(maxSum([1,-2,3,4,-5,-4,3,2,1],[[1,3,5],[0,4,2],[6,8,1]]))
