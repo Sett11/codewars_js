@@ -1,8 +1,23 @@
-String.prototype.contains = function(str, ignoreCase = false) {
-    if(str==='?')return false
-    return !ignoreCase ? this.toLowerCase().match(str.toLowerCase()) !== null : this.match(str) !== null
+Number.prototype.add = function(num) {
+    return this + num
 }
 
-console.log('hello123'.contains('123'))
-console.log('hello123'.contains('123', false))
-console.log('hello'.contains('123'))
+Number.prototype.sub = function(num) {
+    return this - num
+}
+
+Number.prototype.mul = function(num) {
+    return this * num
+}
+
+Number.prototype.div = function(num) {
+    return this / num
+}
+
+Number.prototype.pow = function(num) {
+    return this ** num
+}
+
+Number.prototype.sqr = function() {
+    return this ** 0.5
+}
