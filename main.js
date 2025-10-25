@@ -1,22 +1,13 @@
-function boatLoader(arr) {
-  let a = arr.filter(e=>typeof e === 'string')
-  let counts = a.reduce((acc, val) => {
-    acc[val] = (acc[val] || 0) + 1
-    return acc
-  }, {});
-  let filtered = Object.entries(counts)
-    .filter(([key, value]) => value > 1)
-    .map(([key]) => key);
-  filtered.sort((a, b) => {
-    if (a.toLowerCase() === b.toLowerCase()) {
-      if (a === b) return 0;
-      if (a === a.toUpperCase() && b === b.toLowerCase()) return -1;
-      if (a === a.toLowerCase() && b === b.toUpperCase()) return 1;
-      return a.localeCompare(b);
-    }
-    return a.toLowerCase().localeCompare(b.toLowerCase());
-  })
-  return filtered.map(e => [e, e]);
+function perc(minutes) {
+    if (typeof minutes !== 'number' || minutes < 1 || minutes > 100) return "invalid track time";
+    const bpm = 120;
+    const beatsPerBar = 4;
+    const barsPerMinute = bpm / beatsPerBar;
+    const totalBars = minutes * barsPerMinute;
+    const kicks = Math.round(totalBars * 4);
+    const hihats = Math.round(totalBars * 8);
+    const claps = Math.round(totalBars * 2);
+    return [`${kicks} kicks`, `${hihats} hihats`, `${claps} claps`];
 }
 
-console.log(boatLoader(['a','d','G','V','X','F','g','h','s','r','a','g','n','s','e','r','j','a','f','D','F','G','R','H','C','X','B','N','G','U','G','F','p','s','r','g','a']))
+console.log(perc(3))
