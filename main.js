@@ -1,13 +1,5 @@
-function maximumSeating(a) {
-  let c = 0
-  let f = x =>{
-    for(let i = 0; i < x.length; i++){
-      if(!x[i]&&!x[i+1]&&!x[i+2]&&!x[i-1]&&!x[i-2]){
-        x[i]=1
-        c++
-      }
-    }
+Array.prototype.toDictionary = function(k, v=x=>x) {
+    const r = {}
+    for(let i of this)r[k(i)]=v(i)
+    return r
   }
-  f(a),f(a.slice().reverse())
-  return c
-}
