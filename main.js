@@ -1,12 +1,5 @@
-const array10 = () => {
-  const result = Array(10).fill().map(() => Array(10));
-  const letters = ['A','B','C','D'];
-  for (let i = 0; i < 10; i++) {
-    const positions = [...Array(10).keys()].sort(() => Math.random() - 0.5).slice(0,4);
-    letters.forEach((letter, idx) => result[i][positions[idx]] = letter);
-    for (let j = 0; j < 10; j++) {
-      if (!result[i][j]) result[i][j] = letters[Math.floor(Math.random() * 4)];
-    }
-  }
-  return result
+function was_package_received_yesterday(tz_from, tz_to, start, duration) {
+  const time_diff = tz_to - tz_from;
+  const receive_time = start + duration + time_diff;
+  return receive_time < 0;
 }
