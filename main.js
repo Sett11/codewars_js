@@ -1,5 +1,21 @@
-function barTriang(p1, p2, p3){
-  const xO = (p1[0] + p2[0] + p3[0]) / 3;
-  const yO = (p1[1] + p2[1] + p3[1]) / 3;
-  return [Number(xO.toFixed(4)), Number(yO.toFixed(4))];
+function matrixDiagonal(matrix, value) {
+    const n = matrix.length;
+    let sum = 0;
+    
+    if (value === 0) {
+        for (let i = 0; i < n; i++) {
+            sum += matrix[i][i];
+        }
+    } else if (value > 0) {
+        for (let i = value; i < n; i++) {
+            sum += matrix[i][i - value];
+        }
+    } else {
+        const absValue = Math.abs(value);
+        for (let i = 0; i < n - absValue; i++) {
+            sum += matrix[i][i + absValue];
+        }
+    }
+    
+    return sum;
 }
