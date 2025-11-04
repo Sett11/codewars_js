@@ -1,21 +1,19 @@
-function matrixDiagonal(matrix, value) {
-    const n = matrix.length;
-    let sum = 0;
+function words(base_n, max) {
+    let digitWords = base_n;
     
-    if (value === 0) {
-        for (let i = 0; i < n; i++) {
-            sum += matrix[i][i];
-        }
-    } else if (value > 0) {
-        for (let i = value; i < n; i++) {
-            sum += matrix[i][i - value];
-        }
-    } else {
-        const absValue = Math.abs(value);
-        for (let i = 0; i < n - absValue; i++) {
-            sum += matrix[i][i + absValue];
-        }
+    if (max < base_n) {
+      return digitWords;
     }
     
-    return sum;
-}
+    let power = 1;
+    let count = 0;
+    
+    while (power <= max) {
+      count++;
+      power *= base_n;
+    }
+    
+    let placeValueWords = count - 1;
+    
+    return digitWords + placeValueWords;
+  }
