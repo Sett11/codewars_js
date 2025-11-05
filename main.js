@@ -1,19 +1,13 @@
-function words(base_n, max) {
-    let digitWords = base_n;
-    
-    if (max < base_n) {
-      return digitWords;
+function prismProperties(s) {
+    if ((s - 2) % 6 !== 0) {
+        throw new Error("No valid prism exists for the given sum");
     }
-    
-    let power = 1;
-    let count = 0;
-    
-    while (power <= max) {
-      count++;
-      power *= base_n;
+    const B = (s - 2) / 6;
+    if (B < 3) {
+        throw new Error("Base sides must be at least 3");
     }
-    
-    let placeValueWords = count - 1;
-    
-    return digitWords + placeValueWords;
-  }
+    const V = 2 * B;
+    const E = 3 * B;
+    const F = B + 2;
+    return [V, E, F, B];
+}
