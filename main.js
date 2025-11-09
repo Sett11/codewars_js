@@ -1,46 +1,25 @@
-class Component {
+function qf(donations, pool) {
+  let received = [];
+  let weights = [];
+  let totalWeight = 0;
   
-  #id;
-  #parent;
-  #children;
-  #visibility;
-  
-  constructor(id, children) {
-    this.#id = id;
-    this.#children = children || [];
-    this.#visibility = null;
-    this.#parent = null;
-    this.#children.forEach(child => child.#parent = this);
-  }
-  
-  set visibility(value) {
-    this.#visibility = value;
-  }
-  
-  get isVisible() {
-    if (this.#visibility !== null) {
-      return this.#visibility;
+  for (let i = 0; i < donations.length; i++) {
+    let projectDonations = donations[i];
+    let sumOfRoots = 0;
+    
+    for (let j = 0; j < projectDonations.length; j++) {
+      sumOfRoots += Math.sqrt(projectDonations[j]);
     }
     
-    // Для корневого компонента с null Visibility возвращаем true
-    if (this.#parent === null) {
-      return true;
-    }
-    
-    // Ищем ближайшего предка с non-null Visibility
-    let ancestor = this.#parent;
-    while (ancestor !== null) {
-      if (ancestor.#visibility !== null) {
-        return ancestor.#visibility;
-      }
-      ancestor = ancestor.#parent;
-    }
-    
-    // Если все предки имеют null Visibility, возвращаем true
-    return true;
+    let weight = Math.pow(sumOfRoots, 2);
+    weights.push(weight);
+    totalWeight += weight;
   }
   
-  toString() {
-    return this.#id;
+  for (let i = 0; i < weights.length; i++) {
+    let funding = pool * (weights[i] / totalWeight);
+    received.push(Math.round(funding));
   }
+  
+  return received;
 }
