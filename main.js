@@ -1,9 +1,8 @@
-function wasCalledWithNew() {
-  const calledWithNew = typeof new.target !== 'undefined' || 
-                       (this instanceof wasCalledWithNew && this.constructor === wasCalledWithNew);
-  return {
-      valueOf: function() {
-          return calledWithNew;
-      }
-  };
+function canEscape(walls) {
+  for (let i = 0; i < walls.length; i++) {
+    if (Math.min(walls[i][0], walls[i][1]) <= i + 1) {
+      return false;
+    }
+  }
+  return true;
 }
