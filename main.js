@@ -1,8 +1,8 @@
-function canEscape(walls) {
-  for (let i = 0; i < walls.length; i++) {
-    if (Math.min(walls[i][0], walls[i][1]) <= i + 1) {
-      return false;
-    }
-  }
-  return true;
+function crossProduct(v1, v2) {
+  
+  const x = v1.y * v2.z - v1.z * v2.y;
+  const y = v1.z * v2.x - v1.x * v2.z;
+  const z = v1.x * v2.y - v1.y * v2.x;
+  
+  return new Vector(x, y, z);
 }
