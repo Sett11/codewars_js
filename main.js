@@ -1,12 +1,15 @@
-function evaporator(content, evapPerDay, threshold) {
-    let days = 0;
-    let currentContent = 100;
-    const thresholdPercent = threshold;
+function movie(card, ticket, perc) {
+    let systemA = 0;
+    let systemB = card;
+    let currentTicketPrice = ticket * perc;
+    let n = 0;
     
-    while (currentContent > thresholdPercent) {
-        currentContent -= currentContent * (evapPerDay / 100);
-        days++;
+    while (Math.ceil(systemB) >= systemA) {
+        n++;
+        systemA = ticket * n;
+        systemB += currentTicketPrice;
+        currentTicketPrice *= perc;
     }
     
-    return days;
-}
+    return n;
+};
