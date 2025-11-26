@@ -1,15 +1,12 @@
-function movie(card, ticket, perc) {
-    let systemA = 0;
-    let systemB = card;
-    let currentTicketPrice = ticket * perc;
-    let n = 0;
+function unluckyDays(year){
+    let blackFridays = 0;
     
-    while (Math.ceil(systemB) >= systemA) {
-        n++;
-        systemA = ticket * n;
-        systemB += currentTicketPrice;
-        currentTicketPrice *= perc;
+    for (let month = 0; month < 12; month++) {
+      const thirteenth = new Date(year, month, 13);
+      if (thirteenth.getDay() === 5) {
+        blackFridays++;
+      }
     }
     
-    return n;
-};
+    return blackFridays;
+  }
