@@ -1,18 +1,16 @@
-function cube(n) {
-  let result = [];
+function crusoe(n, d, ang, distmult, angmult) {
+  let x = 0;
+  let y = 0;
+  let currentDistance = d;
+  let currentAngle = ang * Math.PI / 180;
   
   for (let i = 0; i < n; i++) {
-    let spaces = ' '.repeat(n - i - 1);
-    let slashes = '/\\'.repeat(i + 1);
-    let underscores = '_\\'.repeat(n);
-    result.push(spaces + slashes + underscores);
-  }
-  for (let i = 0; i < n; i++) {
-    let spaces = ' '.repeat(i);
-    let slashes = '\\/'.repeat(n - i);
-    let underscores = '_/'.repeat(n);
-    result.push(spaces + slashes + underscores);
+      x += currentDistance * Math.cos(currentAngle);
+      y += currentDistance * Math.sin(currentAngle);
+      
+      currentDistance *= distmult;
+      currentAngle *= angmult;
   }
   
-  return result.join('\n');
+  return [x, y];
 }
